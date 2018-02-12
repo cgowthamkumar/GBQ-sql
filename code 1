@@ -1,0 +1,26 @@
+#standardSQL
+SELECT
+  ap.visitNumber,
+  ap.visitId,
+  ap.visitStartTime,
+  ap.totals.visits,
+  ap.totals.pageviews,
+  ap.trafficSource.referralPath,
+  ap.trafficSource.campaign,
+  ap.trafficSource.source,
+  ap.trafficSource.medium,
+  un.hitNumber,
+  un.time,
+  un.hour,
+  un.isEntrance,
+  un.isExit,
+  un.eventInfo.eventCategory,
+  un.eventInfo.eventAction,
+  ap.fullVisitorId,
+  ap.channelGrouping
+FROM
+  `bhs---hungerstation.72793951.ga_sessions_20180210` AS ap,
+  UNNEST(ap.hits) un
+WHERE
+  un.appInfo.version = '66'
+  AND ap.totals.hits = 3
