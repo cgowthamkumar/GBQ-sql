@@ -1,0 +1,21 @@
+#standardSQL
+SELECT
+  APPROX_COUNT_DISTINCT(t1_users) AS approx_users,
+  COUNT(DISTINCT CONCAT(CAST(t1_users AS STRING), CAST(t1_visit AS STRING))) AS Exact_visits,
+  APPROX_COUNT_DISTINCT(CONCAT(CAST(t1_users AS STRING), CAST(t1_visit AS STRING))) AS approx_visits,
+  SUM(t1_visitc) AS GA_visits
+FROM (
+  SELECT
+    ap.fullVisitorId AS t1_users,
+    ap.totals.visits AS t1_visitc,
+    ap.visitId AS t1_visit
+    --APPROX_COUNT_DISTINCT(ap.fullVisitorId) as approx_users,
+    --COUNT(DISTINCT CONCAT(CAST(ap.fullVisitorId AS STRING), CAST(ap.visitId AS STRING))) as Exact_visits,
+    --APPROX_COUNT_DISTINCT(CONCAT(CAST(ap.fullVisitorId AS STRING), CAST(ap.visitId AS STRING))) approx_visits,
+    --SUM(ap.totals.visits) GA_visits
+  FROM
+    `bhs---hungerstation.72793951.ga_sessions_201802*` as ap, UNNEST(ap.hits) as un
+  WHERE
+    (_table_suffix BETWEEN '01'
+      AND '10')
+    AND (un.appInfo.version = '66')) t1
