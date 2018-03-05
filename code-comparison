@@ -1,0 +1,718 @@
+SELECT
+  "Android" AS platform,
+  date,
+  INTEGER(areaId) AS areaId,
+  visitor_type,
+  CASE
+    WHEN shopQuantityTotal = 0 THEN "=0"
+    ELSE ">0"
+  END AS shop_quantity_grouped,
+  CASE
+    WHEN shopQuantityDiscount = 0 THEN "=0"
+    ELSE ">0"
+  END AS shopQuantityDiscount,
+  CASE
+    WHEN shopQuantityStamps = 0 THEN "=0"
+    ELSE ">0"
+  END AS shopQuantityStamps,
+  CASE
+    WHEN shopQuantityPremium = 0 THEN "=0"
+    ELSE ">0"
+  END AS shopQuantityPremium,
+  CASE
+    WHEN shopQuantityExpress = 0 THEN "=0"
+    ELSE ">0"
+  END AS shopQuantityExpress,
+  CASE
+    WHEN shopQuantityOnlPay = 0 THEN "=0"
+    ELSE ">0"
+  END AS shopQuantityOnlPay,
+  CASE
+    WHEN shopQuantityTracking = 0 THEN "=0"
+    ELSE ">0"
+  END AS shopQuantityTracking,
+  CASE
+    WHEN shopQuantityFavorites = 0 THEN "=0"
+    ELSE ">0"
+  END AS shopQuantityFavorites,
+  CASE
+    WHEN shopQuantityOca = 0 THEN "=0"
+    ELSE ">0"
+  END AS shopQuantityOca,
+  CASE
+    WHEN shopQuantitySaludable = 0 THEN "=0"
+    ELSE ">0"
+  END AS shopQuantitySaludable,
+  COUNT(sessionId) AS sessions,
+  SUM(IFNULL(filter_no,0)) AS filter_no,
+  SUM(IFNULL(filter_any,0)) AS filter_any,
+  SUM(IFNULL(channel_no,0)) AS channel_no,
+  SUM(IFNULL(channel_any,0)) AS channel_any,
+  SUM(IFNULL(channel_filter_no,0)) AS channel_filter_no,
+  SUM(IFNULL(channel_filter_any,0)) AS channel_filter_any,
+  SUM(IFNULL(filter_food,0)) AS filter_food,
+  SUM(IFNULL(filter_payment,0)) AS filter_payment,
+  SUM(IFNULL(filter_discount,0)) AS filter_discount,
+  SUM(IFNULL(filter_stamp,0)) AS filter_stamp,
+  SUM(IFNULL(filter_onl_pay,0)) AS filter_onl_pay,
+  SUM(IFNULL(channel_discount,0)) AS channel_discount,
+  SUM(IFNULL(channel_stamp,0)) AS channel_stamp,
+  SUM(IFNULL(channel_onl_pay,0)) AS channel_onl_pay,
+  SUM(IFNULL(channel_premium,0)) AS channel_premium,
+  SUM(IFNULL(channel_express,0)) AS channel_express,
+  SUM(IFNULL(channel_tracking,0)) AS channel_tracking,
+  SUM(IFNULL(channel_favorite,0)) AS channel_favorite,
+  SUM(IFNULL(channel_oca,0)) AS channel_oca,
+  SUM(IFNULL(channel_saludable,0)) AS channel_saludable,
+  SUM(IFNULL(search_no,0)) AS search_no,
+  SUM(IFNULL(search,0)) AS search,
+  SUM(IFNULL(sort_no,0)) AS sort_no,
+  SUM(IFNULL(sort_any,0)) AS sort_any,
+  SUM(IFNULL(sort_nearest,0)) AS sort_nearest,
+  SUM(IFNULL(sort_rating,0)) AS sort_rating,
+  SUM(IFNULL(sort_del_time,0)) AS sort_del_time,
+  SUM(IFNULL(sort_del_cost,0)) AS sort_del_cost,
+  SUM(IFNULL(sort_newest,0)) AS sort_newest,
+  SUM(IFNULL(sort_alphabet,0)) AS sort_alphabet,
+  SUM(IFNULL(click,0)) AS click,
+  SUM(IFNULL(click_filter_no,0)) AS click_filter_no,
+  SUM(IFNULL(click_filter_any,0)) AS click_filter_any,
+  SUM(IFNULL(click_channel_no,0)) AS click_channel_no,
+  SUM(IFNULL(click_channel_any,0)) AS click_channel_any,
+  SUM(IFNULL(click_channel_filter_no,0)) AS click_channel_filter_no,
+  SUM(IFNULL(click_channel_filter_any,0)) AS click_channel_filter_any,
+  SUM(IFNULL(click_filter_food,0)) AS click_filter_food,
+  SUM(IFNULL(click_filter_payment,0)) AS click_filter_payment,
+  SUM(IFNULL(click_filter_discount,0)) AS click_filter_discount,
+  SUM(IFNULL(click_filter_stamp,0)) AS click_filter_stamp,
+  SUM(IFNULL(click_filter_onl_pay,0)) AS click_filter_onl_pay,
+  SUM(IFNULL(click_channel_discount,0)) AS click_channel_discount,
+  SUM(IFNULL(click_channel_stamp,0)) AS click_channel_stamp,
+  SUM(IFNULL(click_channel_onl_pay,0)) AS click_channel_onl_pay,
+  SUM(IFNULL(click_channel_premium,0)) AS click_channel_premium,
+  SUM(IFNULL(click_channel_express,0)) AS click_channel_express,
+  SUM(IFNULL(click_channel_tracking,0)) AS click_channel_tracking,
+  SUM(IFNULL(click_channel_favorite,0)) AS click_channel_favorite,
+  SUM(IFNULL(click_channel_oca,0)) AS click_channel_oca,
+  SUM(IFNULL(click_channel_saludable,0)) AS click_channel_saludable,
+  SUM(IFNULL(click_search_no,0)) AS click_search_no,
+  SUM(IFNULL(click_search,0)) AS click_search,
+  SUM(IFNULL(click_sort_default,0)) AS click_sort_default,
+  SUM(IFNULL(click_sort_any,0)) AS click_sort_any,
+  SUM(IFNULL(click_sort_rating,0)) AS click_sort_rating,
+  SUM(IFNULL(click_sort_del_time,0)) AS click_sort_del_time,
+  SUM(IFNULL(click_sort_del_cost,0)) AS click_sort_del_cost,
+  SUM(IFNULL(click_sort_newest,0)) AS click_sort_newest,
+  SUM(IFNULL(click_sort_nearest,0)) AS click_sort_nearest,
+  SUM(IFNULL(click_sort_alphabet,0)) AS click_sort_alphabet,
+  SUM(IFNULL(TA,0)) AS TA,
+  SUM(IFNULL(TA_filter_no,0)) AS TA_filter_no,
+  SUM(IFNULL(TA_filter_any,0)) AS TA_filter_any,
+  SUM(IFNULL(TA_channel_no,0)) AS TA_channel_no,
+  SUM(IFNULL(TA_channel_any,0)) AS TA_channel_any,
+  SUM(IFNULL(TA_channel_filter_no,0)) AS TA_channel_filter_no,
+  SUM(IFNULL(TA_channel_filter_any,0)) AS TA_channel_filter_any,
+  SUM(IFNULL(TA_filter_food,0)) AS TA_filter_food,
+  SUM(IFNULL(TA_filter_payment,0)) AS TA_filter_payment,
+  SUM(IFNULL(TA_filter_discount,0)) AS TA_filter_discount,
+  SUM(IFNULL(TA_filter_stamp,0)) AS TA_filter_stamp,
+  SUM(IFNULL(TA_filter_onl_pay,0)) AS TA_filter_onl_pay,
+  SUM(IFNULL(TA_channel_discount,0)) AS TA_channel_discount,
+  SUM(IFNULL(TA_channel_stamp,0)) AS TA_channel_stamp,
+  SUM(IFNULL(TA_channel_onl_pay,0)) AS TA_channel_onl_pay,
+  SUM(IFNULL(TA_channel_premium,0)) AS TA_channel_premium,
+  SUM(IFNULL(TA_channel_express,0)) AS TA_channel_express,
+  SUM(IFNULL(TA_channel_tracking,0)) AS TA_channel_tracking,
+  SUM(IFNULL(TA_channel_favorite,0)) AS TA_channel_favorite,
+  SUM(IFNULL(TA_channel_oca,0)) AS TA_channel_oca,
+  SUM(IFNULL(TA_channel_saludable,0)) AS TA_channel_saludable,
+  SUM(IFNULL(TA_search_no,0)) AS TA_search_no,
+  SUM(IFNULL(TA_search,0)) AS TA_search,
+  SUM(IFNULL(TA_sort_default,0)) AS TA_sort_default,
+  SUM(IFNULL(TA_sort_any,0)) AS TA_sort_any,
+  SUM(IFNULL(TA_sort_rating,0)) AS TA_sort_rating,
+  SUM(IFNULL(TA_sort_del_time,0)) AS TA_sort_del_time,
+  SUM(IFNULL(TA_sort_del_cost,0)) AS TA_sort_del_cost,
+  SUM(IFNULL(TA_sort_newest,0)) AS TA_sort_newest,
+  SUM(IFNULL(TA_sort_nearest,0)) AS TA_sort_nearest,
+  SUM(IFNULL(TA_sort_alphabet,0)) AS TA_sort_alphabet,
+  SUM(session_transaction) AS session_transaction
+FROM (
+  SELECT
+    A.sessionId AS sessionId,
+    A.visitor_type AS visitor_type,
+    A.date AS date,
+    A.session_transaction AS session_transaction,
+    A.areaId_session AS areaId,
+    B.shopQuantityTotal AS shopQuantityTotal,
+    B.shopQuantityDiscount AS shopQuantityDiscount,
+    B.shopQuantityStamps AS shopQuantityStamps,
+    B.shopQuantityPremium AS shopQuantityPremium,
+    B.shopQuantityExpress AS shopQuantityExpress,
+    B.shopQuantityOnlPay AS shopQuantityOnlPay,
+    B.shopQuantityTracking AS shopQuantityTracking,
+    B.shopQuantityFavorites AS shopQuantityFavorites,
+    B.shopQuantityOca AS shopQuantityOca,
+    B.shopQuantitySaludable AS shopQuantitySaludable,
+    CASE
+      WHEN C.sessionId IS NULL OR (C.filter_discount =0 AND C.filter_stamp =0 AND C.filter_onl_pay =0 AND C.filter_food =0 AND C.filter_payment =0) THEN 1
+      ELSE 0
+    END AS filter_no,
+    CASE
+      WHEN C.filter_discount =1 OR C.filter_stamp =1 OR C.filter_onl_pay =1 OR C.filter_food =1 OR C.filter_payment =1 THEN 1
+      ELSE 0
+    END AS filter_any,
+    CASE
+      WHEN C.sessionId IS NULL OR (C.channel_discount =0 AND C.channel_stamp =0 AND C.channel_onl_pay =0 AND C.channel_premium =0 AND C.channel_express =0 AND C.channel_tracking =0 AND C.channel_favorite =0 AND C.channel_oca =0 AND C.channel_saludable =0) THEN 1
+      ELSE 0
+    END AS channel_no,
+    CASE
+      WHEN C.channel_discount =1 OR C.channel_stamp =1 OR C.channel_onl_pay =1 OR C.channel_premium =1 OR C.channel_express =1 OR C.channel_tracking =1 OR C.channel_favorite =1 OR C.channel_oca =1 OR C.channel_saludable =1 THEN 1
+      ELSE 0
+    END AS channel_any,
+    CASE
+      WHEN C.sessionId IS NULL OR (C.filter_discount =0 AND C.filter_stamp =0 AND C.filter_onl_pay =0 AND C.filter_food =0 AND C.filter_payment =0 AND C.channel_discount =0 AND C.channel_stamp =0 AND C.channel_onl_pay =0 AND C.channel_premium =0 AND C.channel_express =0 AND C.channel_tracking =0 AND C.channel_favorite =0 AND C.channel_oca =0 AND C.channel_saludable =0) THEN 1
+      ELSE 0
+    END AS channel_filter_no,
+    CASE
+      WHEN C.filter_discount =1 OR C.filter_stamp =1 OR C.filter_onl_pay =1 OR C.filter_food =1 OR C.filter_payment =1 OR C.channel_discount =1 OR C.channel_stamp =1 OR C.channel_premium =1 OR C.channel_express =1 OR C.channel_onl_pay =1 OR C.channel_tracking =1 OR C.channel_favorite =1 OR C.channel_oca =1 OR C.channel_saludable =1 THEN 1
+      ELSE 0
+    END AS channel_filter_any,
+    C.filter_food AS filter_food,
+    C.filter_payment AS filter_payment,
+    C.filter_discount AS filter_discount,
+    C.filter_stamp AS filter_stamp,
+    C.filter_onl_pay AS filter_onl_pay,
+    C.channel_discount AS channel_discount,
+    C.channel_stamp AS channel_stamp,
+    C.channel_onl_pay AS channel_onl_pay,
+    C.channel_premium AS channel_premium,
+    C.channel_express AS channel_express,
+    C.channel_tracking AS channel_tracking,
+    C.channel_favorite AS channel_favorite,
+    C.channel_oca AS channel_oca,
+    C.channel_saludable AS channel_saludable,
+    CASE
+      WHEN C.sessionId IS NULL OR (C.sort_nearest =0 AND C.sort_rating =0 AND C.sort_del_time =0 AND C.sort_del_cost =0 AND C.sort_newest =0 AND C.sort_alphabet =0) THEN 1
+      ELSE 0
+    END AS sort_no,
+    CASE
+      WHEN C.sort_nearest =1 OR C.sort_rating =1 OR C.sort_del_time =1 OR C.sort_del_cost =1 OR C.sort_newest =1 OR C.sort_alphabet =1 THEN 1
+      ELSE 0
+    END AS sort_any,
+    C.sort_nearest AS sort_nearest,
+    C.sort_rating AS sort_rating,
+    C.sort_del_time AS sort_del_time,
+    C.sort_del_cost AS sort_del_cost,
+    C.sort_newest AS sort_newest,
+    C.sort_alphabet AS sort_alphabet,
+    CASE
+      WHEN D.sessionId IS NULL OR D.search = 0 THEN 1
+      ELSE 0
+    END AS search_no,
+    CASE
+      WHEN D.sessionId IS NOT NULL AND D.search = 1 THEN 1
+      ELSE 0
+    END AS search,
+    CASE
+      WHEN E.sessionId IS NOT NULL THEN 1
+      ELSE 0
+    END AS click,
+    CASE
+      WHEN E.sessionId IS NOT NULL AND E.click_filter = 0 THEN 1
+      ELSE 0
+    END AS click_filter_no,
+    E.click_filter AS click_filter_any,
+    CASE
+      WHEN E.sessionId IS NOT NULL AND E.click_channel_discount =0 AND E.click_channel_stamp =0 AND E.click_channel_onl_pay =0 AND E.click_channel_premium =0 AND E.click_channel_express =0 AND E.click_channel_tracking =0 AND E.click_channel_favorite =0 AND E.click_channel_oca =0 AND E.click_channel_saludable =0 THEN 1
+      ELSE 0
+    END AS click_channel_no,
+    CASE
+      WHEN E.click_channel_discount =1 OR E.click_channel_stamp =1 OR E.click_channel_premium =1 OR E.click_channel_express =1 OR E.click_channel_onl_pay =1 OR E.click_channel_tracking =1 OR E.click_channel_favorite =1 OR E.click_channel_oca =1 OR E.click_channel_saludable =1 THEN 1
+      ELSE 0
+    END AS click_channel_any,
+    CASE
+      WHEN E.sessionId IS NOT NULL AND E.click_filter =0 AND E.click_channel_discount =0 AND E.click_channel_stamp =0 AND E.click_channel_premium =0 AND E.click_channel_express =0 AND E.click_channel_onl_pay =0 AND E.click_channel_tracking =0 AND E.click_channel_favorite =0 AND E.click_channel_oca =0 AND E.click_channel_saludable =0 THEN 1
+      ELSE 0
+    END AS click_channel_filter_no,
+    CASE
+      WHEN E.click_filter =1 OR E.click_channel_discount =1 OR E.click_channel_stamp =1 OR E.click_channel_premium =1 OR E.click_channel_express =1 OR E.click_channel_onl_pay =1 OR E.click_channel_tracking =1 OR E.click_channel_favorite =1 OR E.click_channel_oca =1 OR E.click_channel_saludable =1 THEN 1
+      ELSE 0
+    END AS click_channel_filter_any,
+    E.click_filter_food AS click_filter_food,
+    E.click_filter_payment AS click_filter_payment,
+    E.click_filter_discount AS click_filter_discount,
+    E.click_filter_stamp AS click_filter_stamp,
+    E.click_filter_onl_pay AS click_filter_onl_pay,
+    E.click_channel_discount AS click_channel_discount,
+    E.click_channel_stamp AS click_channel_stamp,
+    E.click_channel_onl_pay AS click_channel_onl_pay,
+    E.click_channel_premium AS click_channel_premium,
+    E.click_channel_express AS click_channel_express,
+    E.click_channel_tracking AS click_channel_tracking,
+    E.click_channel_favorite AS click_channel_favorite,
+    E.click_channel_oca AS click_channel_oca,
+    E.click_channel_saludable AS click_channel_saludable,
+    CASE
+      WHEN E.sessionId IS NOT NULL AND E.click_search = 0 THEN 1
+      ELSE 0
+    END AS click_search_no,
+    E.click_search AS click_search,
+    CASE
+      WHEN E.sessionId IS NOT NULL AND E.click_sort_rating = 0 AND E.click_sort_del_time = 0 AND E.click_sort_del_cost = 0 AND E.click_sort_newest = 0 AND E.click_sort_nearest = 0 AND E.click_sort_alphabet = 0 THEN 1
+      ELSE 0
+    END AS click_sort_default,
+    CASE
+      WHEN E.click_sort_rating = 1 OR E.click_sort_del_time = 1 OR E.click_sort_del_cost = 1 OR E.click_sort_newest = 1 OR E.click_sort_nearest = 1 OR E.click_sort_alphabet = 1 THEN 1
+      ELSE 0
+    END AS click_sort_any,
+    E.click_sort_rating AS click_sort_rating,
+    E.click_sort_del_time AS click_sort_del_time,
+    E.click_sort_del_cost AS click_sort_del_cost,
+    E.click_sort_newest AS click_sort_newest,
+    E.click_sort_nearest AS click_sort_nearest,
+    E.click_sort_alphabet AS click_sort_alphabet,
+    CASE
+      WHEN F.sessionId IS NOT NULL THEN 1
+      ELSE 0
+    END AS TA,
+    CASE
+      WHEN F.sessionId IS NOT NULL AND F.TA_filter = 0 THEN 1
+      ELSE 0
+    END AS TA_filter_no,
+    F.TA_filter AS TA_filter_any,
+    CASE
+      WHEN F.sessionId IS NOT NULL AND F.TA_channel_discount =0 AND F.TA_channel_stamp =0 AND F.TA_channel_premium =0 AND F.TA_channel_express =0 AND F.TA_channel_onl_pay =0 AND F.TA_channel_tracking =0 AND F.TA_channel_favorite =0 AND F.TA_channel_oca =0 AND F.TA_channel_saludable =0 THEN 1
+      ELSE 0
+    END AS TA_channel_no,
+    CASE
+      WHEN F.TA_channel_discount =1 OR F.TA_channel_stamp =1 OR F.TA_channel_premium =1 OR F.TA_channel_express =1 OR F.TA_channel_onl_pay =1 OR F.TA_channel_tracking =1 OR F.TA_channel_favorite =1 OR F.TA_channel_oca =1 OR F.TA_channel_saludable =1 THEN 1
+      ELSE 0
+    END AS TA_channel_any,
+    CASE
+      WHEN F.sessionId IS NOT NULL AND F.TA_filter =0 AND F.TA_channel_discount =0 AND F.TA_channel_stamp =0 AND F.TA_channel_premium =0 AND F.TA_channel_express =0 AND F.TA_channel_onl_pay =0 AND F.TA_channel_tracking =0 AND F.TA_channel_favorite =0 AND F.TA_channel_oca =0 AND F.TA_channel_saludable =0 THEN 1
+      ELSE 0
+    END AS TA_channel_filter_no,
+    CASE
+      WHEN F.TA_filter =1 OR F.TA_channel_discount =1 OR F.TA_channel_stamp =1 OR F.TA_channel_premium =1 OR F.TA_channel_express =1 OR F.TA_channel_onl_pay =1 OR F.TA_channel_tracking =1 OR F.TA_channel_favorite =1 OR F.TA_channel_oca =1 OR F.TA_channel_saludable =1 THEN 1
+      ELSE 0
+    END AS TA_channel_filter_any,
+    F.TA_filter_food AS TA_filter_food,
+    F.TA_filter_payment AS TA_filter_payment,
+    F.TA_filter_discount AS TA_filter_discount,
+    F.TA_filter_stamp AS TA_filter_stamp,
+    F.TA_filter_onl_pay AS TA_filter_onl_pay,
+    F.TA_channel_discount AS TA_channel_discount,
+    F.TA_channel_stamp AS TA_channel_stamp,
+    F.TA_channel_onl_pay AS TA_channel_onl_pay,
+    F.TA_channel_premium AS TA_channel_premium,
+    F.TA_channel_express AS TA_channel_express,
+    F.TA_channel_tracking AS TA_channel_tracking,
+    F.TA_channel_favorite AS TA_channel_favorite,
+    F.TA_channel_oca AS TA_channel_oca,
+    F.TA_channel_saludable AS TA_channel_saludable,
+    CASE
+      WHEN F.sessionId IS NOT NULL AND F.TA_search = 0 THEN 1
+      ELSE 0
+    END AS TA_search_no,
+    F.TA_search AS TA_search,
+    CASE
+      WHEN F.TA_sort_nearest =0 AND F.TA_sort_rating =0 AND F.TA_sort_del_time =0 AND F.TA_sort_del_cost =0 AND F.TA_sort_newest =0 AND F.TA_sort_alphabet =0 THEN 1
+      ELSE 0
+    END AS TA_sort_default,
+    CASE
+      WHEN F.TA_sort_nearest =1 OR F.TA_sort_rating =1 OR F.TA_sort_del_time =1 OR F.TA_sort_del_cost =1 OR F.TA_sort_newest =1 OR F.TA_sort_alphabet =1 THEN 1
+      ELSE 0
+    END AS TA_sort_any,
+    F.TA_sort_rating AS TA_sort_rating,
+    F.TA_sort_del_time AS TA_sort_del_time,
+    F.TA_sort_del_cost AS TA_sort_del_cost,
+    F.TA_sort_newest AS TA_sort_newest,
+    F.TA_sort_nearest AS TA_sort_nearest,
+    F.TA_sort_alphabet AS TA_sort_alphabet
+  FROM (
+    SELECT
+      CONCAT(fullVisitorId, STRING(visitId)) AS sessionId,
+      MIN(CAST(date AS timestamp)) AS date,
+      MAX(CASE
+          WHEN totals.newVisits IS NULL THEN "Returning Visitor"
+          ELSE "New Visitor" END) AS visitor_type,
+      MIN(INTEGER(REGEXP_REPLACE(hits.appInfo.appVersion, r"\.", ""))) AS appVersion,
+      MAX(CASE
+          WHEN totals.transactions IS NULL THEN 0
+          ELSE 1 END) AS session_transaction,
+      MAX(CASE
+          WHEN customdimensions.index = 17 THEN customdimensions.value END) AS areaId_session  FROM  TABLE_DATE_RANGE([110190327.ga_sessions_],TIMESTAMP(DATE(DATE_ADD(CURRENT_DATE(), -DAYOFWEEK(CURRENT_DATE()) % 7 - 7, "day"))),TIMESTAMP(DATE(DATE_ADD(CURRENT_DATE(), -DAYOFWEEK(CURRENT_DATE()) % 7 + 1, "day"))))  GROUP BY  1  HAVING  appVersion >= 3886 AND areaId_session NOT IN ("NA", "0", "", "(not set)", "not set", "not_set") ) AS A  INNER JOIN ( SELECT  B1.sessionId AS sessionId,  IFNULL(B1.shopQuantityTotal,0) AS shopQuantityTotal,  IFNULL(B1.ch_tracking,0) AS shopQuantityTracking,  IFNULL(B1.ch_onl_pay,0) AS shopQuantityOnlPay,  IFNULL(B1.ch_premium,0) AS shopQuantityPremium,  IFNULL(B1.ch_discount,0) AS shopQuantityDiscount,  IFNULL(B1.ch_stamps,0) AS shopQuantityStamps,  IFNULL(B1.ch_express,0) AS shopQuantityExpress,  IFNULL(B1.ch_favorites,0) AS shopQuantityFavorites,  IFNULL(B1.ch_oca,0) AS shopQuantityOca,  IFNULL(B1.ch_saludable,0) AS shopQuantitySaludable  FROM (  SELECT  CONCAT(fullVisitorId, STRING(visitId)) AS sessionId,  hits.hitNumber AS hitNumber,  MAX(CASE
+            WHEN hits.customdimensions.index = 17 THEN hits.customdimensions.value END) AS areaId_session,
+        MAX(REGEXP_EXTRACT(CASE
+              WHEN hits.customDimensions.index = 168 THEN hits.customDimensions.value END, r"^(?:[^\_]*\_){1}([^\_]*)\_?")) AS areaId_hit,  MAX(CASE
+            WHEN hits.customdimensions.index = 154 THEN hits.customdimensions.value END) AS search_type,
+        MAX(CASE
+            WHEN hits.customdimensions.index = 31 THEN hits.customdimensions.value END) AS filter,  MAX(INTEGER(CASE
+              WHEN hits.customdimensions.index = 33 THEN hits.customdimensions.value END)) AS shopQuantityTotal,
+        MAX(IFNULL(INTEGER(REGEXP_EXTRACT(SUBSTR(REGEXP_EXTRACT(CASE
+                      WHEN hits.customDimensions.index = 170 THEN hits.customDimensions.value END, r"tracking(.*)" ),2), r"^(?:[^\,]*\,){0}([^\,]*)\,?")),0)) AS ch_tracking,  MAX(IFNULL(INTEGER(REGEXP_EXTRACT(SUBSTR(REGEXP_EXTRACT(CASE
+                      WHEN hits.customDimensions.index = 170 THEN hits.customDimensions.value END, r"online_payment(.*)" ),2), r"^(?:[^\,]*\,){0}([^\,]*)\,?")),0)) AS ch_onl_pay,
+        MAX(IFNULL(INTEGER(REGEXP_EXTRACT(SUBSTR(REGEXP_EXTRACT(CASE
+                      WHEN hits.customDimensions.index = 170 THEN hits.customDimensions.value END, r"premium(.*)" ),2), r"^(?:[^\,]*\,){0}([^\,]*)\,?")),0)) AS ch_premium,  MAX(IFNULL(INTEGER(REGEXP_EXTRACT(SUBSTR(REGEXP_EXTRACT(CASE
+                      WHEN hits.customDimensions.index = 170 THEN hits.customDimensions.value END, r"discount(.*)" ),2), r"^(?:[^\,]*\,){0}([^\,]*)\,?")),0)) AS ch_discount,
+        MAX(IFNULL(INTEGER(REGEXP_EXTRACT(SUBSTR(REGEXP_EXTRACT(CASE
+                      WHEN hits.customDimensions.index = 170 THEN hits.customDimensions.value END, r"stamps(.*)" ),2), r"^(?:[^\,]*\,){0}([^\,]*)\,?")),0)) AS ch_stamps,  MAX(IFNULL(INTEGER(REGEXP_EXTRACT(SUBSTR(REGEXP_EXTRACT(CASE
+                      WHEN hits.customDimensions.index = 170 THEN hits.customDimensions.value END, r"express(.*)" ),2), r"^(?:[^\,]*\,){0}([^\,]*)\,?")),0)) AS ch_express,
+        MAX(IFNULL(INTEGER(REGEXP_EXTRACT(SUBSTR(REGEXP_EXTRACT(CASE
+                      WHEN hits.customDimensions.index = 170 THEN hits.customDimensions.value END, r"favorites(.*)" ),2), r"^(?:[^\,]*\,){0}([^\,]*)\,?")),0)) AS ch_favorites,  MAX(IFNULL(INTEGER(REGEXP_EXTRACT(SUBSTR(REGEXP_EXTRACT(CASE
+                      WHEN hits.customDimensions.index = 170 THEN hits.customDimensions.value END, r"oca(.*)" ),2), r"^(?:[^\,]*\,){0}([^\,]*)\,?")),0)) AS ch_oca,
+        MAX(IFNULL(INTEGER(REGEXP_EXTRACT(SUBSTR(REGEXP_EXTRACT(CASE
+                      WHEN hits.customDimensions.index = 170 THEN hits.customDimensions.value END, r"saludable(.*)" ),2), r"^(?:[^\,]*\,){0}([^\,]*)\,?")),0)) AS ch_saludable  FROM  TABLE_DATE_RANGE([110190327.ga_sessions_],TIMESTAMP(DATE(DATE_ADD(CURRENT_DATE(), -DAYOFWEEK(CURRENT_DATE()) % 7 - 7, "day"))),TIMESTAMP(DATE(DATE_ADD(CURRENT_DATE(), -DAYOFWEEK(CURRENT_DATE()) % 7 + 1, "day"))))  WHERE  hits.eventInfo.eventAction = "shop_list.loaded"  GROUP BY  1, 2  HAVING  search_type NOT IN ("area", "city") AND filter IN ("---", "--", "false") AND areaId_hit = areaId_session AND areaId_hit NOT IN ("NA", "0", "", "(not set)", "not set", "not_set") ) AS B1  INNER JOIN (  SELECT  sessionId,  MIN(hitNumber) AS minHitNumber  FROM (  SELECT  CONCAT(fullVisitorId, STRING(visitId)) AS sessionId,  hits.hitNumber AS hitNumber,  MAX(CASE
+              WHEN hits.customdimensions.index = 17 THEN hits.customdimensions.value END) AS areaId_session,
+          MAX(REGEXP_EXTRACT(CASE
+                WHEN hits.customDimensions.index = 168 THEN hits.customDimensions.value END, r"^(?:[^\_]*\_){1}([^\_]*)\_?")) AS areaId_hit,  MAX(CASE
+              WHEN hits.customdimensions.index = 154 THEN hits.customdimensions.value END) AS search_type,
+          MAX(CASE
+              WHEN hits.customdimensions.index = 31 THEN hits.customdimensions.value END) AS filter,  MAX(INTEGER(CASE
+                WHEN hits.customdimensions.index = 33 THEN hits.customdimensions.value END)) AS shopQuantityTotal,
+          MAX(IFNULL(INTEGER(REGEXP_EXTRACT(SUBSTR(REGEXP_EXTRACT(CASE
+                        WHEN hits.customDimensions.index = 170 THEN hits.customDimensions.value END, r"express(.*)"),2), r"^(?:[^\,]*\,){0}([^\,]*)\,?")),0)) AS ch_express  FROM  TABLE_DATE_RANGE([110190327.ga_sessions_],TIMESTAMP(DATE(DATE_ADD(CURRENT_DATE(), -DAYOFWEEK(CURRENT_DATE()) % 7 - 7, "day"))),TIMESTAMP(DATE(DATE_ADD(CURRENT_DATE(), -DAYOFWEEK(CURRENT_DATE()) % 7 + 1, "day"))))  WHERE  hits.eventInfo.eventAction = "shop_list.loaded"  GROUP BY  1, 2  HAVING  search_type NOT IN ("area", "city") AND filter IN ("---", "--", "false") AND areaId_hit = areaId_session AND areaId_hit NOT IN ("NA", "0", "", "(not set)", "not set", "not_set") )  GROUP BY  1 ) AS B2 ON  B1.sessionId = B2.sessionId AND B1.hitNumber = B2.minHitNumber ) AS B ON  A.sessionId = B.sessionId  LEFT JOIN ( SELECT  sessionId,  MAX(CASE
+          WHEN REGEXP_EXTRACT(filter, r"^(?:[^\-]*\-){1}([^\-]*)\-?") IS NOT NULL
+        AND REGEXP_EXTRACT(filter, r"^(?:[^\-]*\-){1}([^\-]*)\-?") <> "" THEN 1
+          ELSE 0 END) AS filter_food,
+      MAX(CASE
+          WHEN REGEXP_EXTRACT(filter, r"^(?:[^\-]*\-){2}([^\-]*)\-?") IS NOT NULL AND REGEXP_EXTRACT(filter, r"^(?:[^\-]*\-){2}([^\-]*)\-?") <> "" THEN 1
+          ELSE 0 END) AS filter_payment,
+      MAX(CASE
+          WHEN (filter_type = "filter" OR REGEXP_MATCH(action, ".*filter.*")) AND REGEXP_MATCH(REGEXP_EXTRACT(filter, r"^(?:[^\-]*\-){0}([^\-]*)\-?"), r".*(discount).*" ) THEN 1
+          ELSE 0 END) AS filter_discount,
+      MAX(CASE
+          WHEN (filter_type = "filter" OR REGEXP_MATCH(action, ".*filter.*")) AND REGEXP_MATCH(REGEXP_EXTRACT(filter, r"^(?:[^\-]*\-){0}([^\-]*)\-?"), r".*(stamp|sellos|selo).*") THEN 1
+          ELSE 0 END) AS filter_stamp,
+      MAX(CASE
+          WHEN (filter_type = "filter" OR REGEXP_MATCH(action, ".*filter.*")) AND REGEXP_MATCH(REGEXP_EXTRACT(filter, r"^(?:[^\-]*\-){0}([^\-]*)\-?"), r".*(payment|Pago|Paga).*") THEN 1
+          ELSE 0 END) AS filter_onl_pay,
+      MAX(CASE
+          WHEN (filter_type = "channel" OR REGEXP_MATCH(action, ".*channel.*")) AND channel = "discount" THEN 1
+          ELSE 0 END) AS channel_discount,
+      MAX(CASE
+          WHEN (filter_type = "channel" OR REGEXP_MATCH(action, ".*channel.*")) AND channel = "stamps" THEN 1
+          ELSE 0 END) AS channel_stamp,
+      MAX(CASE
+          WHEN (filter_type = "channel" OR REGEXP_MATCH(action, ".*channel.*")) AND channel = "online_payment" THEN 1
+          ELSE 0 END) AS channel_onl_pay,
+      MAX(CASE
+          WHEN (filter_type = "channel" OR REGEXP_MATCH(action, ".*channel.*")) AND channel = "premium" THEN 1
+          ELSE 0 END) AS channel_premium,
+      MAX(CASE
+          WHEN (filter_type = "channel" OR REGEXP_MATCH(action, ".*channel.*")) AND channel = "express" THEN 1
+          ELSE 0 END) AS channel_express,
+      MAX(CASE
+          WHEN (filter_type = "channel" OR REGEXP_MATCH(action, ".*channel.*")) AND channel = "tracking" THEN 1
+          ELSE 0 END) AS channel_tracking,
+      MAX(CASE
+          WHEN (filter_type = "channel" OR REGEXP_MATCH(action, ".*channel.*")) AND channel = "favorites" THEN 1
+          ELSE 0 END) AS channel_favorite,
+      MAX(CASE
+          WHEN (filter_type = "channel" OR REGEXP_MATCH(action, ".*channel.*")) AND channel = "oca" THEN 1
+          ELSE 0 END) AS channel_oca,
+      MAX(CASE
+          WHEN (filter_type = "channel" OR REGEXP_MATCH(action, ".*channel.*")) AND channel = "saludable" THEN 1
+          ELSE 0 END) AS channel_saludable,
+      MAX(CASE
+          WHEN sorting = "nearest" THEN 1
+          ELSE 0 END) AS sort_nearest,
+      MAX(CASE
+          WHEN sorting = "rating" THEN 1
+          ELSE 0 END) AS sort_rating,
+      MAX(CASE
+          WHEN sorting = "delivery_time" THEN 1
+          ELSE 0 END) AS sort_del_time,
+      MAX(CASE
+          WHEN sorting = "delivery_cost" THEN 1
+          ELSE 0 END) AS sort_del_cost,
+      MAX(CASE
+          WHEN sorting = "newest" THEN 1
+          ELSE 0 END) AS sort_newest,
+      MAX(CASE
+          WHEN sorting = "alphabetical" THEN 1
+          ELSE 0 END) AS sort_alphabet
+    FROM (
+      SELECT
+        CONCAT(fullVisitorId, STRING(visitId)) AS sessionId,
+        hits.hitNumber AS hitNumber_filter,
+        CASE
+          WHEN REGEXP_MATCH(hits.eventInfo.eventLabel, r"^filter.*") THEN "filter"
+          WHEN REGEXP_MATCH(hits.eventInfo.eventLabel, r"enter_channel") THEN "channel"
+          ELSE "other"
+        END AS filter_type,
+        MAX(CASE
+            WHEN hits.customdimensions.index = 17 THEN hits.customdimensions.value END) AS areaId_session,  MAX(REGEXP_EXTRACT(CASE
+              WHEN hits.customDimensions.index = 168 THEN hits.customDimensions.value END, r"^(?:[^\_]*\_){1}([^\_]*)\_?")) AS areaId_hit,
+        MAX(INTEGER(CASE
+              WHEN hits.customdimensions.index = 33 THEN hits.customdimensions.value END)) AS shopQuantityTotal,  MAX(CASE
+            WHEN hits.customDimensions.index = 169 THEN hits.customDimensions.value END) AS action,
+        MAX(CASE
+            WHEN hits.customDimensions.index = 31 THEN hits.customDimensions.value END) AS filter,  MAX(CASE
+            WHEN hits.customDimensions.index = 171 THEN hits.customDimensions.value END) AS channel,
+        MAX(CASE
+            WHEN hits.customDimensions.index = 32 THEN hits.customDimensions.value END) AS sorting  FROM  TABLE_DATE_RANGE([110190327.ga_sessions_],TIMESTAMP(DATE(DATE_ADD(CURRENT_DATE(), -DAYOFWEEK(CURRENT_DATE()) % 7 - 7, "day"))),TIMESTAMP(DATE(DATE_ADD(CURRENT_DATE(), -DAYOFWEEK(CURRENT_DATE()) % 7 + 1, "day"))))  WHERE  hits.eventInfo.eventAction = "shop_list.updated"  GROUP BY  1, 2, 3  HAVING  areaId_hit = areaId_session AND areaId_hit NOT IN ("NA", "0", "", "(not set)", "not set", "not_set") )  GROUP BY  1 ) AS C ON  A.sessionId = C.sessionId  LEFT JOIN ( SELECT  sessionId,  MAX(CASE
+          WHEN search IS NOT NULL
+        AND search NOT IN ("",
+          "not_set",
+          "(not set)",
+          "not set",
+          "NA") THEN 1
+          ELSE 0 END) AS search
+    FROM (
+      SELECT
+        CONCAT(fullVisitorId, STRING(visitId)) AS sessionId,
+        CASE
+          WHEN hits.customDimensions.index = 156 THEN hits.customDimensions.value
+        END AS search
+      FROM
+        TABLE_DATE_RANGE([110190327.ga_sessions_],TIMESTAMP(DATE(DATE_ADD(CURRENT_DATE(), -DAYOFWEEK(CURRENT_DATE()) % 7 - 7, "day"))),TIMESTAMP(DATE(DATE_ADD(CURRENT_DATE(), -DAYOFWEEK(CURRENT_DATE()) % 7 + 1, "day"))))
+      GROUP BY
+        1,
+        2 )
+    GROUP BY
+      1 ) AS D
+  ON
+    A.sessionId = D.sessionId
+  LEFT JOIN (
+    SELECT
+      sessionId,
+      MAX(CASE
+          WHEN filter IN ("---", "--", "false", "NA", "") THEN 0
+          ELSE 1 END) AS click_filter,
+      MAX(CASE
+          WHEN REGEXP_EXTRACT(filter, r"^(?:[^\-]*\-){1}([^\-]*)\-?") IS NOT NULL AND REGEXP_EXTRACT(filter, r"^(?:[^\-]*\-){1}([^\-]*)\-?") <> "" THEN 1
+          ELSE 0 END) AS click_filter_food,
+      MAX(CASE
+          WHEN REGEXP_EXTRACT(filter, r"^(?:[^\-]*\-){2}([^\-]*)\-?") IS NOT NULL AND REGEXP_EXTRACT(filter, r"^(?:[^\-]*\-){2}([^\-]*)\-?") <> "" THEN 1
+          ELSE 0 END) AS click_filter_payment,
+      MAX(CASE
+          WHEN REGEXP_MATCH(REGEXP_EXTRACT(filter, r"^(?:[^\-]*\-){0}([^\-]*)\-?"), r".*(discount).*") THEN 1
+          ELSE 0 END) AS click_filter_discount,
+      MAX(CASE
+          WHEN REGEXP_MATCH(REGEXP_EXTRACT(filter, r"^(?:[^\-]*\-){0}([^\-]*)\-?"), r".*(stamp|sellos|selo).*") THEN 1
+          ELSE 0 END) AS click_filter_stamp,
+      MAX(CASE
+          WHEN REGEXP_MATCH(REGEXP_EXTRACT(filter, r"^(?:[^\-]*\-){0}([^\-]*)\-?"), r".*(payment|Pago|Paga).*") THEN 1
+          ELSE 0 END) AS click_filter_onl_pay,
+      MAX(CASE
+          WHEN channel = "discount" THEN 1
+          ELSE 0 END) AS click_channel_discount,
+      MAX(CASE
+          WHEN channel = "stamps" THEN 1
+          ELSE 0 END) AS click_channel_stamp,
+      MAX(CASE
+          WHEN channel = "online_payment" THEN 1
+          ELSE 0 END) AS click_channel_onl_pay,
+      MAX(CASE
+          WHEN channel = "premium" THEN 1
+          ELSE 0 END) AS click_channel_premium,
+      MAX(CASE
+          WHEN channel = "express" THEN 1
+          ELSE 0 END) AS click_channel_express,
+      MAX(CASE
+          WHEN channel = "tracking" THEN 1
+          ELSE 0 END) AS click_channel_tracking,
+      MAX(CASE
+          WHEN channel = "favorites" THEN 1
+          ELSE 0 END) AS click_channel_favorite,
+      MAX(CASE
+          WHEN channel = "oca" THEN 1
+          ELSE 0 END) AS click_channel_oca,
+      MAX(CASE
+          WHEN channel = "saludable" THEN 1
+          ELSE 0 END) AS click_channel_saludable,
+      MAX(CASE
+          WHEN searched NOT IN ("(not set)", "not set", "not_set", "NA", "") THEN 1
+          ELSE 0 END) AS click_search,
+      MAX(CASE
+          WHEN sorting = "rating" THEN 1
+          ELSE 0 END) AS click_sort_rating,
+      MAX(CASE
+          WHEN sorting = "delivery_time" THEN 1
+          ELSE 0 END) AS click_sort_del_time,
+      MAX(CASE
+          WHEN sorting = "delivery_cost" THEN 1
+          ELSE 0 END) AS click_sort_del_cost,
+      MAX(CASE
+          WHEN sorting = "newest" THEN 1
+          ELSE 0 END) AS click_sort_newest,
+      MAX(CASE
+          WHEN sorting = "nearest" THEN 1
+          ELSE 0 END) AS click_sort_nearest,
+      MAX(CASE
+          WHEN sorting = "alphabetical" THEN 1
+          ELSE 0 END) AS click_sort_alphabet
+    FROM (
+      SELECT
+        CONCAT(fullVisitorId, STRING(visitId)) AS sessionId,
+        hits.hitNumber AS hitNumber_shop_clicked,
+        hits.eventInfo.eventLabel AS shopId,
+        MAX(CASE
+            WHEN hits.customDimensions.index = 31 THEN hits.customDimensions.value END) AS filter,  MAX(CASE
+            WHEN hits.customDimensions.index = 171 THEN hits.customDimensions.value END) AS channel,
+        MAX(CASE
+            WHEN hits.customdimensions.index = 32 THEN hits.customdimensions.value END) AS sorting,  MAX(CASE
+            WHEN hits.customdimensions.index = 156 THEN hits.customdimensions.value END) AS searched
+      FROM
+        TABLE_DATE_RANGE([110190327.ga_sessions_],TIMESTAMP(DATE(DATE_ADD(CURRENT_DATE(), -DAYOFWEEK(CURRENT_DATE()) % 7 - 7, "day"))),TIMESTAMP(DATE(DATE_ADD(CURRENT_DATE(), -DAYOFWEEK(CURRENT_DATE()) % 7 + 1, "day"))))
+      WHERE
+        hits.eventInfo.eventAction = "shop.clicked"
+      GROUP BY
+        1,
+        2,
+        3 )
+    GROUP BY
+      1 ) AS E
+  ON
+    A.sessionId = E.sessionId
+  LEFT JOIN (
+    SELECT
+      F2.sessionId,
+      MAX(click_filter) AS TA_filter,
+      MAX(click_filter_food) AS TA_filter_food,
+      MAX(click_filter_payment) AS TA_filter_payment,
+      MAX(click_filter_discount) AS TA_filter_discount,
+      MAX(click_filter_stamp) AS TA_filter_stamp,
+      MAX(click_filter_onl_pay) AS TA_filter_onl_pay,
+      MAX(click_channel_discount) AS TA_channel_discount,
+      MAX(click_channel_stamp) AS TA_channel_stamp,
+      MAX(click_channel_onl_pay) AS TA_channel_onl_pay,
+      MAX(click_channel_premium) AS TA_channel_premium,
+      MAX(click_channel_express) AS TA_channel_express,
+      MAX(click_channel_tracking) AS TA_channel_tracking,
+      MAX(click_channel_favorite) AS TA_channel_favorite,
+      MAX(click_channel_oca) AS TA_channel_oca,
+      MAX(click_channel_saludable) AS TA_channel_saludable,
+      MAX(click_search) AS TA_search,
+      MAX(click_sort_rating) AS TA_sort_rating,
+      MAX(click_sort_del_time) AS TA_sort_del_time,
+      MAX(click_sort_del_cost) AS TA_sort_del_cost,
+      MAX(click_sort_newest) AS TA_sort_newest,
+      MAX(click_sort_nearest) AS TA_sort_nearest,
+      MAX(click_sort_alphabet) AS TA_sort_alphabet
+    FROM (
+      SELECT
+        sessionId,
+        shopId,
+        MAX(CASE
+            WHEN filter IN ("---", "--", "false", "NA", "") THEN 0
+            ELSE 1 END) AS click_filter,
+        MAX(CASE
+            WHEN REGEXP_EXTRACT(filter, r"^(?:[^\-]*\-){1}([^\-]*)\-?") IS NOT NULL AND REGEXP_EXTRACT(filter, r"^(?:[^\-]*\-){1}([^\-]*)\-?") <> "" THEN 1
+            ELSE 0 END) AS click_filter_food,
+        MAX(CASE
+            WHEN REGEXP_EXTRACT(filter, r"^(?:[^\-]*\-){2}([^\-]*)\-?") IS NOT NULL AND REGEXP_EXTRACT(filter, r"^(?:[^\-]*\-){2}([^\-]*)\-?") <> "" THEN 1
+            ELSE 0 END) AS click_filter_payment,
+        MAX(CASE
+            WHEN REGEXP_MATCH(REGEXP_EXTRACT(filter, r"^(?:[^\-]*\-){0}([^\-]*)\-?"), r".*(discount).*") THEN 1
+            ELSE 0 END) AS click_filter_discount,
+        MAX(CASE
+            WHEN REGEXP_MATCH(REGEXP_EXTRACT(filter, r"^(?:[^\-]*\-){0}([^\-]*)\-?"), r".*(stamp|sellos|selo).*") THEN 1
+            ELSE 0 END) AS click_filter_stamp,
+        MAX(CASE
+            WHEN REGEXP_MATCH(REGEXP_EXTRACT(filter, r"^(?:[^\-]*\-){0}([^\-]*)\-?"), r".*(payment|Pago|Paga).*") THEN 1
+            ELSE 0 END) AS click_filter_onl_pay,
+        MAX(CASE
+            WHEN channel = "discount" THEN 1
+            ELSE 0 END) AS click_channel_discount,
+        MAX(CASE
+            WHEN channel = "stamps" THEN 1
+            ELSE 0 END) AS click_channel_stamp,
+        MAX(CASE
+            WHEN channel = "online_payment" THEN 1
+            ELSE 0 END) AS click_channel_onl_pay,
+        MAX(CASE
+            WHEN channel = "premium" THEN 1
+            ELSE 0 END) AS click_channel_premium,
+        MAX(CASE
+            WHEN channel = "express" THEN 1
+            ELSE 0 END) AS click_channel_express,
+        MAX(CASE
+            WHEN channel = "tracking" THEN 1
+            ELSE 0 END) AS click_channel_tracking,
+        MAX(CASE
+            WHEN channel = "favorites" THEN 1
+            ELSE 0 END) AS click_channel_favorite,
+        MAX(CASE
+            WHEN channel = "oca" THEN 1
+            ELSE 0 END) AS click_channel_oca,
+        MAX(CASE
+            WHEN channel = "saludable" THEN 1
+            ELSE 0 END) AS click_channel_saludable,
+        MAX(CASE
+            WHEN searched NOT IN ("(not set)", "not set", "not_set", "NA", "") THEN 1
+            ELSE 0 END) AS click_search,
+        MAX(CASE
+            WHEN sorting = "rating" THEN 1
+            ELSE 0 END) AS click_sort_rating,
+        MAX(CASE
+            WHEN sorting = "delivery_time" THEN 1
+            ELSE 0 END) AS click_sort_del_time,
+        MAX(CASE
+            WHEN sorting = "delivery_cost" THEN 1
+            ELSE 0 END) AS click_sort_del_cost,
+        MAX(CASE
+            WHEN sorting = "newest" THEN 1
+            ELSE 0 END) AS click_sort_newest,
+        MAX(CASE
+            WHEN sorting = "nearest" THEN 1
+            ELSE 0 END) AS click_sort_nearest,
+        MAX(CASE
+            WHEN sorting = "alphabetical" THEN 1
+            ELSE 0 END) AS click_sort_alphabet
+      FROM (
+        SELECT
+          CONCAT(fullVisitorId, STRING(visitId)) AS sessionId,
+          hits.hitNumber AS hitNumber_shop_clicked,
+          hits.eventInfo.eventLabel AS shopId,
+          MAX(CASE
+              WHEN hits.customDimensions.index = 31 THEN hits.customDimensions.value END) AS filter,  MAX(CASE
+              WHEN hits.customDimensions.index = 171 THEN hits.customDimensions.value END) AS channel,
+          MAX(CASE
+              WHEN hits.customdimensions.index = 32 THEN hits.customdimensions.value END) AS sorting,  MAX(CASE
+              WHEN hits.customdimensions.index = 156 THEN hits.customdimensions.value END) AS searched
+        FROM
+          TABLE_DATE_RANGE([110190327.ga_sessions_],TIMESTAMP(DATE(DATE_ADD(CURRENT_DATE(), -DAYOFWEEK(CURRENT_DATE()) % 7 - 7, "day"))),TIMESTAMP(DATE(DATE_ADD(CURRENT_DATE(), -DAYOFWEEK(CURRENT_DATE()) % 7 + 1, "day"))))
+        WHERE
+          hits.eventInfo.eventAction = "shop.clicked"
+        GROUP BY
+          1,
+          2,
+          3 )
+      GROUP BY
+        1,
+        2 ) AS F1
+    INNER JOIN (
+      SELECT
+        sessionId,
+        shopId
+      FROM (
+        SELECT
+          CONCAT(fullVisitorId, STRING(visitId)) AS sessionId,
+          hits.hitNumber AS hitNumber_TA,
+          MAX(CASE
+              WHEN hits.customDimensions.index = 20 THEN hits.customDimensions.value END) AS shopId
+        FROM
+          TABLE_DATE_RANGE([110190327.ga_sessions_],TIMESTAMP(DATE(DATE_ADD(CURRENT_DATE(), -DAYOFWEEK(CURRENT_DATE()) % 7 - 7, "day"))),TIMESTAMP(DATE(DATE_ADD(CURRENT_DATE(), -DAYOFWEEK(CURRENT_DATE()) % 7 + 1, "day"))))
+        WHERE
+          hits.eventInfo.eventAction = "transaction"
+        GROUP BY
+          1,
+          2 )
+      GROUP BY
+        1,
+        2 ) AS F2
+    ON
+      F1.sessionId = F2.sessionId
+      AND F1.shopId = F2.shopId
+    GROUP BY
+      1 ) AS F
+  ON
+    A.sessionId = F.sessionId )
+GROUP BY
+  1,2,3,4,5,6,7,8,9,10,11,12,13,14
+HAVING
+  date BETWEEN DATE_ADD(CURRENT_DATE(), -DAYOFWEEK(CURRENT_DATE()) % 7 - 6, "day")
+  AND DATE_ADD(CURRENT_DATE(), -DAYOFWEEK(CURRENT_DATE()) % 7, "day")
